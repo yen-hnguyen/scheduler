@@ -58,8 +58,7 @@ export default function Application(props) {
   const setDays = (days) => setState((prev) => ({ ...prev, days }));
 
   useEffect(() => {
-    const url = `http://localhost:8001/api/days`;
-    axios.get(url).then((response) => {
+    axios.get('/api/days').then((response) => {
       setDays(response.data);
     });
   }, []);
