@@ -6,7 +6,7 @@ import Appointment from './Appointment';
 
 import 'components/Application.scss';
 
-import { getAppointmentsForDay } from 'helpers/selectors';
+import { getAppointmentsForDay, getInterview } from 'helpers/selectors';
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -19,7 +19,16 @@ export default function Application(props) {
   const dailyAppointments = getAppointmentsForDay(state, state.day);
 
   const appointmentArr = dailyAppointments.map((obj) => {
-    return <Appointment key={obj.id} {...obj} />;
+    const interview = getInterview(state, obj.interview);
+
+    return (
+      <Appointment
+        key={obj.id}
+        id={obj.id}
+        time={obj.time}
+        interview={interview}
+      />
+    );
   });
 
   useEffect(() => {
@@ -36,8 +45,6 @@ export default function Application(props) {
       }))
     );
   }, []);
-
-  console.log(state.interviewers);
 
   return (
     <main className='layout'>
