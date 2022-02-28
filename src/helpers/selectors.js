@@ -4,7 +4,6 @@
  * @param {string} day
  * @returns - an array of appointments details for the specific day
  */
-
 export function getAppointmentsForDay(state, day) {
   const appointmentDay = state.days.filter((obj) => obj.name === day);
 
@@ -13,9 +12,11 @@ export function getAppointmentsForDay(state, day) {
   }
 
   const appointmentIDArr = appointmentDay[0].appointments;
-  const result = appointmentIDArr.map((id) => state.appointments[id]);
+  const appointmentsResult = appointmentIDArr.map(
+    (id) => state.appointments[id]
+  );
 
-  return result;
+  return appointmentsResult;
 }
 
 /**
@@ -24,7 +25,6 @@ export function getAppointmentsForDay(state, day) {
  * @param {object} interview - contain student name & interviewer ID
  * @returns - a new object with existing studen info and add interviewer detail
  */
-
 export function getInterview(state, interview) {
   if (!interview) {
     return null;
@@ -37,4 +37,26 @@ export function getInterview(state, interview) {
   const interviewResult = { ...interview, interviewer: interviewer[0] };
 
   return interviewResult;
+}
+
+/**
+ *
+ * @param {object} state
+ * @param {string} day
+ * @returns an array of interviewers details for the specific day
+ */
+
+export function getInterviewersForDay(state, day) {
+  const appointmentDay = state.days.filter((obj) => obj.name === day);
+
+  if (appointmentDay.length < 1) {
+    return [];
+  }
+
+  const interviewessIDArr = appointmentDay[0].interviewers;
+  const interviewersResult = interviewessIDArr.map(
+    (id) => state.interviewers[id]
+  );
+
+  return interviewersResult;
 }
