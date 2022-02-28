@@ -14,6 +14,7 @@ export default function Appointment(props) {
   const EMPTY = 'EMPTY';
   const CREATE = 'CREATE';
   const SAVING = 'Saving';
+  const DELETING = 'Deleting';
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
@@ -27,6 +28,11 @@ export default function Appointment(props) {
 
     transition(SAVING);
     props.bookInterview(props.id, interview).then(() => transition(SHOW));
+  }
+
+  function deleteInterview(id) {
+    transition(DELETING);
+    props.cancelInterview(id).then(() => transition(EMPTY));
   }
 
   return (
@@ -45,9 +51,11 @@ export default function Appointment(props) {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={() => deleteInterview(props.id)}
         />
       )}
       {mode === SAVING && <Status message={SAVING} />}
+      {mode === DELETING && <Status message={DELETING} />}
     </article>
   );
 }
