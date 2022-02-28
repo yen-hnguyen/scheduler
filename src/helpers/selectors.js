@@ -1,5 +1,5 @@
 /**
- *
+ * Function to get appointments for a day
  * @param {object} state - contains days and appointments
  * @param {string} day
  * @returns - an array of appointments details for the specific day
@@ -20,7 +20,7 @@ export function getAppointmentsForDay(state, day) {
 }
 
 /**
- *
+ * Function to get interview info
  * @param {object} state - contains interviewers
  * @param {object} interview - contain student name & interviewer ID
  * @returns - a new object with existing studen info and add interviewer detail
@@ -40,7 +40,7 @@ export function getInterview(state, interview) {
 }
 
 /**
- *
+ * Function to get interviewers for a day
  * @param {object} state
  * @param {string} day
  * @returns an array of interviewers details for the specific day
