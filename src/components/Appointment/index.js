@@ -13,7 +13,7 @@ export default function Appointment(props) {
   const SHOW = 'SHOW';
   const EMPTY = 'EMPTY';
   const CREATE = 'CREATE';
-  const SAVING = 'SAVING';
+  const SAVING = 'Saving';
 
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
