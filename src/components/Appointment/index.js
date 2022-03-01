@@ -30,6 +30,11 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
+  /**
+   * Function to save student name and interviewer ID as interview info
+   * @param {string} name - student's name for the appointment
+   * @param {number} interviewer - interviewer ID
+   */
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -43,6 +48,10 @@ export default function Appointment(props) {
       .catch((err) => transition(ERROR_SAVE, true));
   }
 
+  /**
+   * Function to delete an existing interview
+   * @param {number} id - interview ID
+   */
   function deleteInterview(id) {
     transition(DELETING, true);
     props
