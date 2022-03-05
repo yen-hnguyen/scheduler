@@ -62,17 +62,14 @@ export default function useApplicationData() {
       [id]: appointment,
     };
 
-    return axios
-      .put(`/api/appointments/${id}`, appointment)
-      .then(() => {
-        if (!state.appointments[id].interview) {
-          const days = updateSpots(1);
-          setState((prev) => ({ ...prev, appointments, days }));
-        } else {
-          setState((prev) => ({ ...prev, appointments }));
-        }
-      })
-      .catch((err) => console.log(err));
+    return axios.put(`/api/appointments/${id}`, appointment).then(() => {
+      if (!state.appointments[id].interview) {
+        const days = updateSpots(1);
+        setState((prev) => ({ ...prev, appointments, days }));
+      } else {
+        setState((prev) => ({ ...prev, appointments }));
+      }
+    });
   }
 
   /**
@@ -90,13 +87,10 @@ export default function useApplicationData() {
       [id]: appointment,
     };
 
-    return axios
-      .delete(`/api/appointments/${id}`, appointment)
-      .then(() => {
-        const days = updateSpots(-1);
-        setState((prev) => ({ ...prev, appointments, days }));
-      })
-      .catch((err) => console.log(err));
+    return axios.delete(`/api/appointments/${id}`, appointment).then(() => {
+      const days = updateSpots(-1);
+      setState((prev) => ({ ...prev, appointments, days }));
+    });
   }
 
   return { state, setDay, bookInterview, cancelInterview };
