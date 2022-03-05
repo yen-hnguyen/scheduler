@@ -11,11 +11,11 @@ export default function useVisualMode(initial) {
    */
   function transition(newMode, replace = false) {
     if (replace === false) {
-      setHistory((prev) => [...prev, mode]);
       setMode(newMode);
-    } else {
       setHistory((prev) => [...prev, newMode]);
+    } else {
       setMode(newMode);
+      setHistory((prev) => [...prev.slice(0, prev.length - 1), newMode]);
     }
   }
 
@@ -23,10 +23,11 @@ export default function useVisualMode(initial) {
    * Function to transition back to our previous mode
    */
   function back() {
-    if (history.length >= 1) {
-      history.pop();
+    if (history.length > 1) {
+      const newHistory = [...history.slice(0, history.length - 1)];
+      setMode(newHistory[newHistory.length - 1]);
+      setHistory(newHistory);
     }
-    setMode(history.pop());
   }
 
   return { mode, transition, back };
