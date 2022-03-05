@@ -4,6 +4,11 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
+  /**
+   * Function will take in new mode and update the mode state with the new value
+   * @param {string} newMode - new mode value
+   * @param {boolean} replace - to set the history to reflect whether or not to replace the current mode
+   */
   function transition(newMode, replace = false) {
     if (replace === false) {
       setHistory((prev) => [...prev, mode]);
@@ -14,6 +19,9 @@ export default function useVisualMode(initial) {
     }
   }
 
+  /**
+   * Function to transition back to our previous mode
+   */
   function back() {
     if (history.length >= 1) {
       history.pop();
