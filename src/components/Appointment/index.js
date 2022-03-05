@@ -98,11 +98,9 @@ export default function Appointment(props) {
           onSave={save}
         />
       )}
-      {mode === ERROR_SAVE && (
-        <Error message={errSaveMsg} onClose={() => back()} />
-      )}
+      {mode === ERROR_SAVE && <Error message={errSaveMsg} onClose={back} />}
       {mode === ERROR_DELETE && (
-        <Error message={errDeleteMsg} onClose={() => back()} />
+        <Error message={errDeleteMsg} onClose={() => transition(SHOW)} />
       )}
     </article>
   );
