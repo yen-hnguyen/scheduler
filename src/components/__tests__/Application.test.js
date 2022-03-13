@@ -1,5 +1,7 @@
 import React from 'react';
 
+import axios from 'axios';
+
 import {
   render,
   cleanup,
@@ -109,5 +111,13 @@ describe('Application', () => {
       queryByText(day, 'Monday')
     );
     expect(getByText(day, '1 spot remaining')).toBeInTheDocument();
+  });
+
+  it('shows the save error when failing to save an appointment', () => {
+    axios.put.mockRejectedValueOnce();
+  });
+
+  it('shows the save error when failing to delete an appointment', async () => {
+    axios.delete.mockRejectedValueOnce();
   });
 });
